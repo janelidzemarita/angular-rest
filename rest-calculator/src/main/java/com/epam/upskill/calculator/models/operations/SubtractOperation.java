@@ -2,14 +2,16 @@ package com.epam.upskill.calculator.models.operations;
 
 import com.epam.upskill.calculator.models.Result;
 
-import java.math.BigDecimal;
 
 public class SubtractOperation extends OperationAbstract {
 
 	@Override
 	public Result perform() throws Exception {
-		Result result = new Result();
-		result.setResult(BigDecimal.ZERO);
+		Result result = operandsValidator();
+		if (!result.getError()) {
+			result.setResult(operand1.subtract(operand2));
+			result.setError(Boolean.FALSE);
+		}
 		return result;
 	}
 	
