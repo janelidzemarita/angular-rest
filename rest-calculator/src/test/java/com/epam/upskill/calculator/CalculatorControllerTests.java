@@ -186,6 +186,112 @@ public class CalculatorControllerTests {
 
 		assertEquals(expectedResult, response.getContentAsString());
 	}
+	@Test
+	public void subtractPositiveOperatorWithNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": null, \"operand2\": 3}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void subtractBothOperandsNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": null, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+	@Test
+	public void multiplyPositiveOperatorWithNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": 4, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void multiplyBothOperandsNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": null, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void dividePositiveOperatorWithNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": 8, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void divideBothOperandsNullTest() throws Exception {
+		String jsonBody = "{\"operand1\": null, \"operand2\": null}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"Error: One of the operands is not valid\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
 
 
 }
