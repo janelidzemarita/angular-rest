@@ -83,15 +83,109 @@ public class CalculatorControllerTests {
 		assertEquals(expectedResult, response.getContentAsString());
 
 	}
-	
+
 	@Test
 	public void divideZeroOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 5, \"operand2\": 0}";
 
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String expectedResult = "{\"message\":\"Error: Can't divide by zero\",\"error\":true,\"result\":null}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
 	}
-	
 	@Test
 	public void negativeDivisionOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 10, \"operand2\": -2}";
 
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/divide").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":-5.0000000000}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
 	}
+
+	@Test
+	public void multiplyPositiveOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 3, \"operand2\": 4}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":12}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void multiplyNegativeOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": -5, \"operand2\": 2}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/multiply").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":-10}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void subtractPositiveOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 7, \"operand2\": 3}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":4}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
+	@Test
+	public void subtractNegativeOperatorTest() throws Exception{
+		String jsonBody = "{\"operand1\": 2, \"operand2\": 5}";
+
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(Constants.CALCULATOR_PATH + "/subtract").accept(
+				MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(jsonBody);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = result.getResponse();
+
+		String expectedResult = "{\"message\":\"\",\"error\":false,\"result\":-3}";
+
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+		assertEquals(expectedResult, response.getContentAsString());
+	}
+
 
 }
